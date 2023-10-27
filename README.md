@@ -1,10 +1,8 @@
 # Markus 3D Print Filament Sample Generator
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R6R8DQO8C)
-
- Samples               | Samples Box (by Zahg)
-:---------------------:|:-------------------------:
- ![](docs/samples.png) | ![](docs/samples_box.png)
+|        Samples        |   Samples Box (by Zahg)   |
+| :-------------------: | :-----------------------: |
+| ![](docs/samples.png) | ![](docs/samples_box.png) |
 
 We've all come across like 100 different 3D print filament samples, but most require you to either request new ones from the author, or you need the special commercial CAD tool to go into the parameters and change the text yourself.
 
@@ -18,7 +16,7 @@ So how is this any good? Easy: The packaged `gen_samples.py` script just reads a
 - make sure you have OpenSCAD and Python available on your machine (see below for OS-specific prerequisite install instructions)
 - make sure you have the 'Liberation Sans' Font available, it comes with LibreOffice or you can get it from here: <https://www.1001freefonts.com/de/liberation-sans.font>
 - edit `samples.csv` and put in the filaments you like to generate samples for
-- if you are not on Windows or your OpenSCAD install is not in the `C:\Program Files` standard path, edit `gen_samples.py` and at the top put in the path to the executable for the variable `OPENSCAD`, or just uncomment the `openscad` entry if it is accessible anywhere on your machine because it is part of your PATH variable 
+- if you are not on Windows or your OpenSCAD install is not in the `C:\Program Files` standard path, edit `gen_samples.py` and at the top put in the path to the executable for the variable `OPENSCAD`, or just uncomment the `openscad` entry if it is accessible anywhere on your machine because it is part of your PATH variable
 - run `gen_samples.py`, if your Python install is in your PATH or `.py` files are linked you should even be able to just double-click it, if not get a command line shell and run `python gen_samples.py` (on Linux you might have to use python3 instead)
 
 ## Using VS Code
@@ -68,6 +66,7 @@ For OpenSCAD I recommend checking if your standard package manager has it availa
 If you are running homebrew you should be able to get both Python 3 and OpenSCAD via `brew`, otherwise go to the webpages of OpenSCAD and Python and get the newest Mac distribution from there.
 
 ## Ackknowledgements
+
 I derived this OpenSCAD model from blazerat over at printables: <https://www.printables.com/de/model/356074-filament-sample-card/files>
 
 I really loved the temperature idea, but I like the form factor and Box better offered by Seemomster <https://www.printables.com/de/model/228249-filament-samples-42-materials> and originally Zahg (<https://www.printables.com/de/model/16322-filament-sample-with-box/files>)
@@ -76,6 +75,6 @@ So I basically turned the samples by blazerat into the form factor of Zahgs samp
 
 ## Your Support
 
-If you like what you see, you can leave me a tip here:
+If you like what you see, you can leave me a like and a comment here:
 
-![kofi_QR](https://user-images.githubusercontent.com/25175069/178159517-26c0ddef-30bc-4c48-ad57-1b4eeb40206e.png)
+https://makerworld.com/en/models/16866#profileId-24328
