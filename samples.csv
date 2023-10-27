@@ -1,9 +1,118 @@
-extrudr,Biofusion,Metallic Grey,225,60
-extrudr,PETG,Black,230,80
-JAYO,PLA+,Black,205,60
-JAYO,PLA+ Silk,Red Copper,210,60
-JAYO,PLA+ Silk,Light Gold,210,60
-JAYO,PETG,Black,230,80
-JAYO,PETG,Orange,230,80
-ERYONE,PLA Matte,Navy Blue,215,60
-OVERTURE,PETG,Rock White,235,80
+Bambu Labs,PLA-CF,Burgundy Red,210-240,34-45
+Bambu Labs,PLA-CF,Jeans Blue,210-240,34-45
+Bambu Labs,PLA-CF,Lava Gray,210-240,34-45
+Bambu Labs,PLA-CF,Black,210-240,34-45
+Bambu Labs,PLA-CF,Matcha Green,210-240,34-45
+Bambu Labs,PLA-CF,Royal Blue,210-240,34-45
+Bambu Labs,PLA-CF,Iris Purple,210-240,34-45
+Bambu Labs,PLA Basic,Purple,190-230,34-45
+Bambu Labs,PLA Basic,Gold,190-230,34-45
+Bambu Labs,PLA Basic,Bronze,190-230,34-45
+Bambu Labs,PLA Basic,Bambu Green,190-230,34-45
+Bambu Labs,PLA Basic,Jade White,190-230,34-45
+Bambu Labs,PLA Basic,Silver,190-230,34-45
+Bambu Labs,PLA Basic,Blue,190-230,34-45
+Bambu Labs,PLA Basic,Red,190-230,34-45
+Bambu Labs,PLA Basic,Black,190-230,34-45
+Bambu Labs,PLA Basic,Orange,190-230,34-45
+Bambu Labs,PLA Basic,Beige,190-230,34-45
+Bambu Labs,PLA Basic,Blue Grey,190-230,34-45
+Bambu Labs,PLA Basic,Pink,190-230,34-45
+Bambu Labs,PLA Basic,Green,190-230,34-45
+Bambu Labs,PLA Basic,Gray,190-230,34-45
+Bambu Labs,PLA Basic,Brown,190-230,34-45
+Bambu Labs,PLA Basic,Yellow,190-230,34-45
+Bambu Labs,PLA Basic,Magenta,190-230,34-45
+Bambu Labs,PLA Basic,Cyan,190-230,34-45
+Bambu Labs,PLA Matte,Marine Blue,190-230,34-45
+Bambu Labs,PLA Matte,Sakura Pink,190-230,34-45
+Bambu Labs,PLA Matte,Lilac Purple,190-230,34-45
+Bambu Labs,PLA Matte,Lemon Yellow,190-230,34-45
+Bambu Labs,PLA Matte,Grass Green,190-230,34-45
+Bambu Labs,PLA Matte,Mandarin Orange,190-230,34-45
+Bambu Labs,PLA Matte,Ice Blue,190-230,34-45
+Bambu Labs,PLA Matte,Scarlet Red,190-230,34-45
+Bambu Labs,PLA Matte,Latte Brown,190-230,34-45
+Bambu Labs,PLA Matte,Charcoal,190-230,34-45
+Bambu Labs,PLA Matte,Ash Grey,190-230,34-45
+Bambu Labs,PLA Matte,Ivory White,190-230,34-45
+Bambu Labs,PLA Matte,Dark Green,190-230,34-45
+Bambu Labs,PLA Matte,Dark Red,190-230,34-45
+Bambu Labs,PLA Matte,Dark Blue,190-230,34-45
+Bambu Labs,PLA Matte,Dark Brown,190-230,34-45
+Bambu Labs,PETG,Transparent,240-270,65-75
+Bambu Labs,PETG,Lime Green,240-270,65-75
+Bambu Labs,PETG,Nature,240-270,65-75
+Bambu Labs,PETG,Black,240-270,65-75
+Bambu Labs,PETG,White,240-270,65-75
+Bambu Labs,PETG,Gray,240-270,65-75
+Bambu Labs,PETG,Red,240-270,65-75
+Bambu Labs,PETG,Green,240-270,65-75
+Bambu Labs,PETG,Blue,240-270,65-75
+Bambu Labs,PETG,Orange,240-270,65-75
+Bambu Labs,PETG,Lake Blue,240-270,65-75
+Bambu Labs,PETG,Gold,240-270,65-75
+Bambu Labs,PETG,Yellow,240-270,65-75
+Bambu Labs,PETG,Blue Gray,240-270,65-75
+Bambu Labs,PETG,Purple,240-270,65-75
+Bambu Labs,PA6-CF,Black,260-290,80-100
+Bambu Labs,PAHT-CF,Black,260-290,80-100
+Bambu Labs,PET-CF,Black,260-290,80-100
+Bambu Labs,PLA Gradient,Ocean Meadow,190-230,34-45
+Bambu Labs,PLA Gradient,Solar Breeze,190-230,34-45
+Bambu Labs,PLA Gradient,Artic Whisper,190-230,34-45
+Bambu Labs,ASA,White,240-270,80-100
+Bambu Labs,ASA,Green,240-270,80-100
+Bambu Labs,ASA,Red,240-270,80-100
+Bambu Labs,ASA,Blue,240-270,80-100
+Bambu Labs,ASA,Gray,240-270,80-100
+Bambu Labs,ASA,Black,240-270,80-100
+Bambu Labs,PETG-CF,Violet Purple,240-270,65-75
+Bambu Labs,PETG-CF,Black,240-270,65-75
+Bambu Labs,PETG-CF,Brick Red,240-270,65-75
+Bambu Labs,PETG-CF,Indigo Blue,240-270,65-75
+Bambu Labs,PETG-CF,Malachite Green,240-270,65-75
+Bambu Labs,PLA Silk,Silver,210-240,34-45
+Bambu Labs,PLA Silk,Gold,210-240,34-45
+Bambu Labs,PLA Silk,Blue,210-240,34-45
+Bambu Labs,PLA Silk,Copper,210-240,34-45
+Bambu Labs,PLA Marble,Granite Red,190-230,34-45
+Bambu Labs,PLA Marble,White Marble,190-230,34-45
+Bambu Labs,PLA Aero,White,210-260,35-45
+Bambu Labs,PLA Aero,Black,210-260,35-45
+Bambu Labs,PLA Tough,White,190-230,34-45
+Bambu Labs,PLA Tough,Silver,190-230,34-45
+Bambu Labs,PLA Tough,Gray,190-230,34-45
+Bambu Labs,PLA Tough,Black,190-230,34-45
+Bambu Labs,PLA Tough,Lavender Blue,190-230,34-45
+Bambu Labs,PLA Tough,Vermillion Red,190-230,34-45
+Bambu Labs,PLA Tough,Orange,190-230,34-45
+Bambu Labs,PLA Tough,Yellow,190-230,34-45
+Bambu Labs,PLA Tough,Light Blue,190-230,34-45
+Bambu Labs,PLA Tough,Pine Green,190-230,34-45
+Bambu Labs,PLA Metal,Copper Brown,190-230,34-45
+Bambu Labs,PLA Metal,Iron Gray,190-230,34-45
+Bambu Labs,PLA Metal,Iridium Gold,190-230,34-45
+Bambu Labs,PLA Metal,Cobalt Blue,190-230,34-45
+Bambu Labs,PLA Metal,Oxide Green,190-230,34-45
+Bambu Labs,PLA Sparkle,Crimson Red,190-230,34-45
+Bambu Labs,PLA Sparkle,Slate Gray,190-230,34-45
+Bambu Labs,PLA Sparkle,Royal Purple,190-230,34-45
+Bambu Labs,PLA Sparkle,Alpine Green,190-230,34-45
+Bambu Labs,PLA Sparkle,Onyx Black,190-230,34-45
+Bambu Labs,TPU 95A,White,220-240,30-35
+Bambu Labs,TPU 95A,Black,220-240,30-35
+Bambu Labs,PC,White,260-280,90-110
+Bambu Labs,PC,Transparent,260-280,90-110
+Bambu Labs,PC,Clear Black,260-280,90-110
+Bambu Labs,PC,Black,260-280,90-110
+Bambu Labs,ABS,White,240-270,80-100
+Bambu Labs,ABS,Silver,240-270,80-100
+Bambu Labs,ABS,Red,240-270,80-100
+Bambu Labs,ABS,Orange,240-270,80-100
+Bambu Labs,ABS,Yellow,240-270,80-100
+Bambu Labs,ABS,Mint,240-270,80-100
+Bambu Labs,ABS,Bambu Green,240-270,80-100
+Bambu Labs,ABS,Blue,240-270,80-100
+Bambu Labs,ABS,Purple,240-270,80-100
+Bambu Labs,ABS,Black,240-270,80-100

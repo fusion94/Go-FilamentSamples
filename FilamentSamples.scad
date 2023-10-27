@@ -5,6 +5,9 @@ TYPE="Biofusion";
 TEMP_HOTEND="225";
 TEMP_BED="60";
 
+//hole radius. Set to 0 to have no hole
+r_hole=2;
+
 // Change only if absolutely necessary
 COLOR_SIZE=5.5;
 // Change only if absolutely necessary
@@ -35,24 +38,24 @@ CARD_EDGE_RADIUS=1.1;
 
 // General Notch
 
-NOTCH_RADIUS=0.0;
-NOTCH_Y=CARD_HEIGHT + 0.1;
+NOTCH_RADIUS=3.0;
+NOTCH_Y=CARD_HEIGHT - 6.75;
 
 // PLA Notch
 
-PLA_NOTCH_X=17.0;
+PLA_NOTCH_X=73.0;
 
 // PETG Notch
 
-PETG_NOTCH_X=34.0;
+//PETG_NOTCH_X=34.0;
 
 // ABS Notch Location
 
-ABS_NOTCH_X=51.0;
+//ABS_NOTCH_X=51.0;
 
 // Other Notch Location
 
-OTHER_NOTCH_X=68.0;
+OTHER_NOTCH_X=73.0;
 INFILL_NOTCH_X=25.5;
 
 // Inset
@@ -98,8 +101,12 @@ module CardBody() {
       
     CardCorner(CARD_LENGTH - CARD_CORNER_RADIUS, CARD_HEIGHT - CARD_CORNER_RADIUS, CARD_EDGE_RADIUS);
     CardCorner(CARD_LENGTH - CARD_CORNER_RADIUS, CARD_HEIGHT - CARD_CORNER_RADIUS, CARD_THICKNESS - CARD_EDGE_RADIUS);
+    
+    
+    
   }
 }
+
 
 module Notch(X) {
   translate([X, NOTCH_Y, 0])
