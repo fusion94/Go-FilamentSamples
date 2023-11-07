@@ -1,4 +1,4 @@
-# Markus 3D Print Filament Sample Generator
+# 3D Print Filament Sample Generator
 
 |        Samples        |   Samples Box (by Zahg)   |
 | :-------------------: | :-----------------------: |
