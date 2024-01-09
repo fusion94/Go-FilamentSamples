@@ -25,16 +25,29 @@ def gen_samples(file=f"{MYDIR}/samples.csv"):
             if len(l) > 0:
                 print("Processing:", l)
                 filename = "stl/" + "_".join(l) + ".stl"
-                subprocess.run(
-                    [OPENSCAD,
-                    '-o', filename,
-                    '-D', f'BRAND="{l[0]}"',
-                    '-D', f'TYPE="{l[1]}"',
-                    '-D', f'COLOR="{l[2]}"',
-                    '-D', f'TEMP_HOTEND="{l[3]}"',
-                    '-D', f'TEMP_BED="{l[4]}"',
-                    f'{MYDIR}/FilamentSamples.scad',
-                    ], check=True)
+                args = [OPENSCAD]  # process name
+                outfile = ['-o', filename]
+                brand = ['-D', f'BRAND="{l[0]}"']
+                type = ['-D', f'TYPE="{l[1]}"']
+                color = ['-D', f'COLOR="{l[2]}"']
+                noztemp = ['-D', f'TEMP_HOTEND="{l[3]}"']
+                bedtemp = ['-D', f'TEMP_BED="{l[4]}"']
+                # extra parameter
+                if len(l) > 5:
+                    font_size = ['-D', f'TYPE_SIZE={l[5]}']
+                infile = f'{MYDIR}/FilamentSamples.scad'
+                args.extend(outfile)
+                args.extend(brand)
+                args.extend(type)
+                args.extend(color)
+                args.extend(noztemp)
+                args.extend(bedtemp)
+                if font_size:
+                    print("adding optional parameter font_size: " + l[5])
+                    args.extend(font_size)
+                args.append(infile)  # this MUST be last param
+                print("Calling OpenSCAD with params: ", args)
+                subprocess.run(args, check=True)
 
 
 if __name__ == "__main__":

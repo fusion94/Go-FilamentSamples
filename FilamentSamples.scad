@@ -1,7 +1,7 @@
 // Change For Each Card
 BRAND="extrudr";
 COLOR="Metallic Grey";
-TYPE="PolyTerra PLA";
+TYPE="Biofusion";
 TEMP_HOTEND="225";
 TEMP_BED="60";
 
@@ -13,9 +13,9 @@ COLOR_SIZE=5.5;
 // Change only if absolutely necessary
 TEMP_SIZE=4.2;
 // Change only if absolutely necessary
-BRAND_SIZE=3.8;
+BRAND_SIZE=4.2;
 // Change only if absolutely necessary
-TYPE_SIZE=3.8;
+TYPE_SIZE=4.2;
 
 // change not supported right now
 SHOW_FIRSTLAYER_TEMP=0;
