@@ -1,7 +1,7 @@
 // Change For Each Card
 BRAND="extrudr";
 COLOR="Metallic Grey";
-TYPE="Biofusion";
+TYPE="PolyTerra PLA";
 TEMP_HOTEND="225";
 TEMP_BED="60";
 
@@ -13,9 +13,9 @@ COLOR_SIZE=5.5;
 // Change only if absolutely necessary
 TEMP_SIZE=4.2;
 // Change only if absolutely necessary
-BRAND_SIZE=4.2;
+BRAND_SIZE=3.8;
 // Change only if absolutely necessary
-TYPE_SIZE=4.2;
+TYPE_SIZE=3.8;
 
 // change not supported right now
 SHOW_FIRSTLAYER_TEMP=0;
@@ -101,9 +101,6 @@ module CardBody() {
       
     CardCorner(CARD_LENGTH - CARD_CORNER_RADIUS, CARD_HEIGHT - CARD_CORNER_RADIUS, CARD_EDGE_RADIUS);
     CardCorner(CARD_LENGTH - CARD_CORNER_RADIUS, CARD_HEIGHT - CARD_CORNER_RADIUS, CARD_THICKNESS - CARD_EDGE_RADIUS);
-    
-    
-    
   }
 }
 
