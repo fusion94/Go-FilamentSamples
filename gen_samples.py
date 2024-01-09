@@ -11,7 +11,7 @@ if platform.system() == 'Windows':
 elif platform.system() == 'Linux':
     OPENSCAD = 'openscad'
 else:
-    OPENSCAD = 'openscad' #'/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD'
+    OPENSCAD = '/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD'
 
 MYDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -50,7 +50,41 @@ def gen_samples(file=f"{MYDIR}/samples.csv"):
                 subprocess.run(args, check=True)
 
 
+def find_mac_openscad():
+    global OPENSCAD
+    # on mac verify we have openscad
+    if platform.system() == 'Darwin':
+        found = False
+        if not os.path.exists(OPENSCAD):
+            print("OpenSCAD is not in default /Applications")
+            if not os.path.exists(os.path.expanduser('~') + OPENSCAD):
+                print("OpenSCAD is not in user's ~/Applications")
+                print("Trying to see if there is an openscad command in your path...")
+                args = ['openscad', '-v']
+                try:
+                    proc = subprocess.run(args, capture_output=True, check=True)
+                    if proc.returncode == 0:
+                        found = True
+                        print("openscad version found in path: ", proc.stderr.decode())
+                        OPENSCAD='openscad'
+                except Exception:
+                    print("Could not find any openscad command in your path... aborting")
+            else:
+                print("OpenSCAD found in user's application folder")
+                OPENSCAD = os.path.expanduser('~') + OPENSCAD
+                found = True
+        else:
+            print("OpenSCAD found in system application folder")
+            found = True
+        if not found:
+            print("Could not find OpenSCAD binary, please makesure that you have the OpenSCAD app in /applications or "
+                  "~/Applications or an 'openscad' command in your path")
+            sys.exit(1)
+
+
 if __name__ == "__main__":
+    find_mac_openscad()
+
     if len(sys.argv) < 1:
         print("You did not pass any .csv file, using samples.csv")
         gen_samples()
