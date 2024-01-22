@@ -33,6 +33,7 @@ def gen_samples(file=f"{MYDIR}/samples.csv"):
                 noztemp = ['-D', f'TEMP_HOTEND="{l[3]}"']
                 bedtemp = ['-D', f'TEMP_BED="{l[4]}"']
                 # extra parameter
+                font_size = None
                 if len(l) > 5:
                     font_size = ['-D', f'TYPE_SIZE={l[5]}']
                 infile = f'{MYDIR}/FilamentSamples.scad'
@@ -85,7 +86,7 @@ def find_mac_openscad():
 if __name__ == "__main__":
     find_mac_openscad()
 
-    if len(sys.argv) < 1:
+    if len(sys.argv) < 2:
         print("You did not pass any .csv file, using samples.csv")
         gen_samples()
     else:
