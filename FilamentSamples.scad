@@ -47,7 +47,7 @@ PLA_NOTCH_X=73.0;
 
 // PETG Notch
 
-//PETG_NOTCH_X=34.0;
+PETG_NOTCH_X=73.0;
 
 // ABS Notch Location
 

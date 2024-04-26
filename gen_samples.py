@@ -24,6 +24,9 @@ def gen_samples(file=f"{MYDIR}/samples.csv"):
         for l in data:
             if len(l) > 0:
                 print("Processing:", l)
+                if l[0].startswith("#"):
+                    print("Line is a comment, skipping...")
+                    continue
                 filename = "stl/" + "_".join(l) + ".stl"
                 args = [OPENSCAD]  # process name
                 outfile = ['-o', filename]
@@ -32,10 +35,19 @@ def gen_samples(file=f"{MYDIR}/samples.csv"):
                 color = ['-D', f'COLOR="{l[2]}"']
                 noztemp = ['-D', f'TEMP_HOTEND="{l[3]}"']
                 bedtemp = ['-D', f'TEMP_BED="{l[4]}"']
-                # extra parameter
-                font_size = None
+                # extra parameters
+                brand_font_size = None
+                material_font_size = None
+                color_font_size = None
                 if len(l) > 5:
-                    font_size = ['-D', f'TYPE_SIZE={l[5]}']
+                    print("brand size: " + l[5])
+                    if l[5]:
+                        brand_font_size = ['-D', f'BRAND_SIZE={l[5]}']
+                if len(l) > 6:
+                    if l[6]:
+                        material_font_size = ['-D', f'TYPE_SIZE={l[6]}']
+                if len(l) > 7 and l[7]:
+                    brand_font_size = ['-D', f'COLOR_SIZE={l[7]}']
                 infile = f'{MYDIR}/FilamentSamples.scad'
                 args.extend(outfile)
                 args.extend(brand)
@@ -43,9 +55,15 @@ def gen_samples(file=f"{MYDIR}/samples.csv"):
                 args.extend(color)
                 args.extend(noztemp)
                 args.extend(bedtemp)
-                if font_size:
-                    print("adding optional parameter font_size: " + l[5])
-                    args.extend(font_size)
+                if brand_font_size:
+                    print("adding optional parameter brand_size: " + l[5])
+                    args.extend(brand_font_size)
+                if material_font_size:
+                    print("adding optional parameter type_size: " + l[6])
+                    args.extend(material_font_size)
+                if color_font_size:
+                    print("adding optional parameter color_size: " + l[7])
+                    args.extend(color_font_size)
                 args.append(infile)  # this MUST be last param
                 print("Calling OpenSCAD with params: ", args)
                 subprocess.run(args, check=True)
@@ -67,7 +85,7 @@ def find_mac_openscad():
                     if proc.returncode == 0:
                         found = True
                         print("openscad version found in path: ", proc.stderr.decode())
-                        OPENSCAD='openscad'
+                        OPENSCAD = 'openscad'
                 except Exception:
                     print("Could not find any openscad command in your path... aborting")
             else:
@@ -78,7 +96,7 @@ def find_mac_openscad():
             print("OpenSCAD found in system application folder")
             found = True
         if not found:
-            print("Could not find OpenSCAD binary, please makesure that you have the OpenSCAD app in /applications or "
+            print("Could not find OpenSCAD binary, please make sure that you have the OpenSCAD app in /applications or "
                   "~/Applications or an 'openscad' command in your path")
             sys.exit(1)
 
