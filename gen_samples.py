@@ -27,6 +27,9 @@ def gen_samples(file=f"{MYDIR}/samples.csv"):
                 if l[0].startswith("#"):
                     print("Line is a comment, skipping...")
                     continue
+                if not l[0].strip():
+                    print("Line is empty, skipping...")
+                    continue
                 filename = "stl/" + "_".join(l) + ".stl"
                 args = [OPENSCAD]  # process name
                 outfile = ['-o', filename]
