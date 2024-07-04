@@ -3,7 +3,7 @@
 #  Brand,Material,Color,NozzleTemp,BedTemp,BrandFontSize,MaterialFontSize,ColorFontSize
 # default value (you can leave empty) for font size is 4.2
 
-#Overture,PLA,Black,190-220,25-60
+Overture,PLA,Black,190-220,25-60
 #Overture,PLA Silk,Yellow,200-220,50-60
 #Overture,PLA,Royal Gold,190-220,25-60
 #PolyMaker,PolyTerra PLA,Cotton White,190-230,25-60,,3.8
@@ -14,5 +14,6 @@
 #Amazon Basics,PETG,Transparent,230-250,60-80,3.6
 #Eryone,PLA+,Skin,190-220,55-70
 #FlashForge,PETG Pro,Burnt Titanium,220-240,80
-Sunlu,TPU Silk,Burgundy,210-240,35
+#Sunlu,TPU Silk,Burgundy,210-240,35
+eSun,eABS+HS,Grey,230-270,90-110
  
