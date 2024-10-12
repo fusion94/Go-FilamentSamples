@@ -1,6 +1,9 @@
 name: Spell Check
 
 on: [pull_request]
+  paths-ignore:
+    - 'samples.csv'
+    - 'stl/**'
 
 jobs:
   typos-check:
