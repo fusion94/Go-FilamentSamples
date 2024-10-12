@@ -80,7 +80,7 @@ in python. I forked that repp and made significant changes to it including a
 complete rewrite and basic unit tests. You can find that in the
 [legacy-python](legacy-python/) directory.
 
-I have since rewitten that completely in Golang.
+I have since rewritten that completely in Golang.
 
 This was derived this OpenSCAD model from blazerat over at printables:
 <https://www.printables.com/de/model/356074-filament-sample-card/files>
