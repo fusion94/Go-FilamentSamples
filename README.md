@@ -50,9 +50,9 @@ file to store the generated STL files.
 
 1. Build the Go Application:
 
-- Open a terminal (or command prompt) in the directory containing `generate_main.go`.
+- Open a terminal (or command prompt) in the directory containing `generator_main.go`.
 - Run the following command to build the application:
-  - `go build -o stl_generator generate_main.go`
+  - `go build -o stl_generator generator_main.go`
 - This will create an executable named `stl_generator` (or `stl_generator.exe` on Windows).
 
 2. Run the Application:
