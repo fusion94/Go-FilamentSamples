@@ -39,7 +39,7 @@ Files` standard path, edit `gen_samples.py` and at the top put in the path to
 
 Another great method across systems is using VS Code. If you cloned this repo
 and open it within VS-Code make sure you have the Python extension installed.
-Then you can just edit the .csv right there, open the `gen_saples.py` script and
+Then you can just edit the .csv right there, open the `gen_samples.py` script and
 immidiately run it with the play button in the upper right. Of course you still
 need some version of Python and OpenSCAD installed, Python should be found by VS
 Code if it is there.
@@ -55,8 +55,7 @@ filament, but should be in the ballpark of 20-30min.
 ![slicer settings](docs/slicer_settings.png)
 
 There should be approx 5g of filament being used (1) (depending on density of
-course)
-Also make sure after slicing that the 'thickness staircase'(2) is visible
+course) Also make sure after slicing that the 'thickness staircase'(2) is visible
 (especially the single layer all the way to the right), there is no non-solid
 infill areas (3) and the letters look proper:
 
