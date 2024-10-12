@@ -4,18 +4,18 @@
 | :-------------------: | :-----------------------: |
 | ![](docs/samples.png) | ![](docs/samples_box.png) |
 
-We've all come across like 100 different 3D print filament samples, but most
-require you to either request new ones from the author, or you need the special
-commercial CAD tool to go into the parameters and change the text yourself.
+We've all encountered dozens of 3D print filament samples, but most require you
+to either request new ones from the creator or use a specialized commercial CAD
+tool to adjust the parameters and change the text.
 
-This generator is based on OpenSCAD, a completely free 'programmable' CAD tool.
-But OpenSCAD is scary to 95% of all users because it essentially forces you to
-program your CAD model. Usually this is also not what I do, but for such samples
-this is the ideal approach.
+This generator, however, is built on OpenSCAD, a completely free 'programmable'
+CAD tool. Now, OpenSCAD can be intimidating for most users since it involves
+programming your CAD model. While that's usually not how I work either, for this
+type of sample creation, it's the perfect approach.
 
-So how is this any good? Easy: The packaged `gen_samples.py` script just reads a
-`samples.csv` file, where you can put in your list of samples you would like. No
-programming skills required.
+So, why is this useful? Simple: the included `gen_samples.py` script reads from a
+`samples.csv` file where you can list the samples you want. No coding skills
+needed!
 
 ## How To
 
@@ -37,12 +37,13 @@ Files` standard path, edit `gen_samples.py` and at the top put in the path to
 
 ## Using VS Code
 
-Another great method across systems is using VS Code. If you cloned this repo
-and open it within VS-Code make sure you have the Python extension installed.
-Then you can just edit the .csv right there, open the `gen_samples.py` script and
-immidiately run it with the play button in the upper right. Of course you still
-need some version of Python and OpenSCAD installed, Python should be found by VS
-Code if it is there.
+Another convenient method that works across systems is using VS Code. If you've
+cloned this repo and opened it in VS Code, ensure you have the Python extension
+installed. From there, you can easily edit the `.csv` file, open the
+`gen_samples.py` script, and run it directly using the play button in the top
+right corner. Of course, you'll still need to have Python and OpenSCAD
+installed, but VS Code should automatically detect Python if it's already set up
+on your system.
 
 ## Using the stl-Models
 
