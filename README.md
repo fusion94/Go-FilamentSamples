@@ -13,10 +13,6 @@ CAD tool. Now, OpenSCAD can be intimidating for most users since it involves
 programming your CAD model. While that's usually not how I work either, for this
 type of sample creation, it's the perfect approach.
 
-So, why is this useful? Simple: the included `gen_samples.py` script reads from a
-`samples.csv` file where you can list the samples you want. No coding skills
-needed!
-
 ## Prerequisites
 
 1. **Go Installed:**
@@ -78,18 +74,16 @@ files in the specified output location.
 
 ## Ackknowledgements
 
-I derived this OpenSCAD model from blazerat over at printables:
+This was originally a fork of Markus Krause's
+[FilamentSamples](https://github.com/markusdd/FilamentSamples) that was written
+in python. I forked that repp and made significant changes to it including a
+complete rewrite and basic unit tests. You can find that in the
+[legacy-python](legacy-python/) directory.
+
+I have since rewitten that completely in Golang.
+
+This was derived this OpenSCAD model from blazerat over at printables:
 <https://www.printables.com/de/model/356074-filament-sample-card/files>
-
-I really loved the temperature idea, but I like the form factor and Box better
-offered by Seemomster
-<https://www.printables.com/de/model/228249-filament-samples-42-materials> and
-originally Zahg
-(<https://www.printables.com/de/model/16322-filament-sample-with-box/files>)
-
-So I basically turned the samples by blazerat into the form factor of Zahgs
-samples and box, with added info, while maintaining the 5-step thickness
-staircase.
 
 ## Your Support
 
