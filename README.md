@@ -17,86 +17,64 @@ So, why is this useful? Simple: the included `gen_samples.py` script reads from 
 `samples.csv` file where you can list the samples you want. No coding skills
 needed!
 
-## How To
+## Prerequisites
 
-- make sure you have OpenSCAD and Python available on your machine (see below
-  for OS-specific prerequisite install instructions)
-- make sure you have the 'Liberation Sans' Font available, it comes with
-  LibreOffice or you can get it from here:
-  <https://www.1001freefonts.com/de/liberation-sans.font>
-- edit `samples.csv` and put in the filaments you like to generate samples for
-- if you are not on Windows or your OpenSCAD install is not in the `C:\Program
-Files` standard path, edit `gen_samples.py` and at the top put in the path to
-  the executable for the variable `OPENSCAD`, or just uncomment the `openscad`
-  entry if it is accessible anywhere on your machine because it is part of your
-  PATH variable
-- run `gen_samples.py`, if your Python install is in your PATH or `.py` files
-  are linked you should even be able to just double-click it, if not get a
-  command line shell and run `python gen_samples.py` (on Linux you might have to
-  use python3 instead)
+1. **Go Installed:**
 
-## Using VS Code
+Ensure you have Go installed on your machine. You can download it from the
+official Go website. Follow the installation instructions for your operating
+system.
 
-Another convenient method that works across systems is using VS Code. If you've
-cloned this repo and opened it in VS Code, ensure you have the Python extension
-installed. From there, you can easily edit the `.csv` file, open the
-`gen_samples.py` script, and run it directly using the play button in the top
-right corner. Of course, you'll still need to have Python and OpenSCAD
-installed, but VS Code should automatically detect Python if it's already set up
-on your system.
+2. **OpenSCAD Installed:**
 
-## Using the stl-Models
+The application depends on OpenSCAD to generate STL files. Make sure it is installed and accessible in your system's PATH. You can download OpenSCAD from the OpenSCAD website.
 
-The output will be generated under the `stl`-Folder.
-If you pull the models into your Slicer make sure to select 0.2mm line
-thickness(1), the actual Filament profile(2) you want to print with.
-The print time (3) will vary according to your print speed settings for that
-filament, but should be in the ballpark of 20-30min.
+- Depending on your operating system, the installation path will vary:
+  - **Windows:** Typically `C:\Program Files\OpenSCAD\openscad.exe`.
+  - **Linux:** Can be installed via your package manager (e.g., `apt`, `yum`, etc.).
+  - **macOS:** Installed through a direct download or Homebrew (`brew install openscad`).
 
-![slicer settings](docs/slicer_settings.png)
+3. CSV File:
 
-There should be approx 5g of filament being used (1) (depending on density of
-course) Also make sure after slicing that the 'thickness staircase'(2) is visible
-(especially the single layer all the way to the right), there is no non-solid
-infill areas (3) and the letters look proper:
+Create a CSV file with the necessary parameters. The format of the CSV file
+should include the columns expected by the script, typically:
 
-![slicer sliced](docs/slicer_sliced.png)
-
-You can then proceed with printing! Have fun!
-
-## Prerequisite Installation
-
-### Windows
-
-The by far easiest method nowadays is to use `winget`, just get a Powershell or
-a cmd-prompt and run:
-
-```sh
-winget install OpenSCAD.OpenSCAD
-winget install Python.Python.3.11
 ```
+BRAND,TYPE,COLOR,TEMP_HOTEND,TEMP_BED,BRAND_SIZE,TYPE_SIZE,COLOR_SIZE
+```
+Ensure this file is placed in the same directory as the Go application or
+provide its path as a command-line argument.
 
-This should work on all recently supported versions of Windows 10 and 11.
+4. Directory Structure:
 
-Alternatively go to the OpenSCAD and Python webpages and download the latest
-version from there.
+The Go application will create an stl directory in the same location as the CSV
+file to store the generated STL files.
 
-### Linux
+## Running the Application
 
-Any reasonably recent distribution will have a Python3 version available in the
-PATH as `python3`, for very recent ones `python` is also at version 3 already.
-You can check with `python --version`.
+1. Build the Go Application:
 
-For OpenSCAD I recommend checking if your standard package manager has it
-available (like `apt`, `dnf`, `pacman` etc.). Usually the distros software
-centers also now search Flatpak or AppImage repositories, so I recommend you
-just search for OpenSCAD there and fetch it this way.
+- Open a terminal (or command prompt) in the directory containing `generate_main.go`.
+- Run the following command to build the application:
+  - `go build -o stl_generator generate_main.go`
+- This will create an executable named `stl_generator` (or `stl_generator.exe` on Windows).
 
-### MacOS
+2. Run the Application:
 
-If you are running homebrew you should be able to get both Python 3 and OpenSCAD
-via `brew`, otherwise go to the webpages of OpenSCAD and Python and get the
-newest Mac distribution from there.
+- Execute the application, optionally providing a path to the CSV file:
+  ``` bash 
+  ./stl_generator samples.csv  # On Unix/Linux/macOS
+  stl_generator.exe samples.csv  # On Windows
+  ```
+- If no CSV file is provided, it will default to `samples.csv` in the same
+  directory.
+
+### Troubleshooting
+
+- **OpenSCAD Not Found**: If you see an error about OpenSCAD not being found, ensure it is correctly installed and accessible via the command line.
+- **CSV Format Errors**: Make sure the CSV file does not contain empty lines or improperly formatted lines, as they will be skipped.
+- **Permissions**: Ensure you have the necessary permissions to create directories and
+files in the specified output location.
 
 ## Ackknowledgements
 
