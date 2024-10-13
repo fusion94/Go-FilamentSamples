@@ -1,5 +1,8 @@
 # 3D Print Filament Sample Generator
 
+[![Go](https://github.com/fusion94/Go-FilamentSamples/actions/workflows/go.yml/badge.svg)](https://github.com/fusion94/Go-FilamentSamples/actions/workflows/go.yml)
+[![Spell Checking](https://github.com/fusion94/Go-FilamentSamples/actions/workflows/SpellCheck.yml/badge.svg)](https://github.com/fusion94/Go-FilamentSamples/actions/workflows/SpellCheck.yml)
+
 |        Samples        |   Samples Box (by Zahg)   |
 | :-------------------: | :-----------------------: |
 | ![](docs/samples.png) | ![](docs/samples_box.png) |
