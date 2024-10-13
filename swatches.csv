@@ -1,6 +1,7 @@
 # Lines starting with # are ignored
 # the CVS format is the following:
-#  Brand,Material,Color,NozzleTemp,BedTemp,BrandFontSize,MaterialFontSize,ColorFontSize
+#  Brand, Material, Color, NozzleTemp, BedTemp, BrandFontSize, MaterialFontSize,
+ColorFontSize
 # default value (you can leave empty) for font size is 4.2
 
 Overture,PLA,Black,190-220,25-60
