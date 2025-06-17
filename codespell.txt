@@ -1,2 +1,10 @@
 PAHT
 Bambu
+Zahg
+openscad
+OpenSCAD
+HOTEND
+Markus
+Krause's
+blazerat
+printables

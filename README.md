@@ -49,24 +49,51 @@ provide its path as a command-line argument.
 The Go application will create an stl directory in the same location as the CSV
 file to store the generated STL files.
 
-## Running the Application
+## Building and Running
 
-1. Build the Go Application:
+### Build the Application
 
-- Open a terminal (or command prompt) in the directory containing `generator_main.go`.
-- Run the following command to build the application:
-  - `go build -o stl_generator generator_main.go`
-- This will create an executable named `stl_generator` (or `stl_generator.exe` on Windows).
+Using Make (recommended):
+```bash
+make build
+```
 
-2. Run the Application:
+Or using Go directly:
+```bash
+go build -o filament-samples ./cmd/filament-samples
+```
 
-- Execute the application, optionally providing a path to the CSV file:
-  ``` bash 
-  ./stl_generator samples.csv  # On Unix/Linux/macOS
-  stl_generator.exe samples.csv  # On Windows
-  ```
-- If no CSV file is provided, it will default to `samples.csv` in the same
-  directory.
+### Running the Application
+
+Basic usage:
+```bash
+./filament-samples                    # Uses samples.csv in current directory
+./filament-samples -csv myfile.csv    # Use custom CSV file
+./filament-samples -help              # Show all options
+```
+
+Advanced options:
+```bash
+# Use custom settings
+./filament-samples -csv samples.csv -output ./stl -workers 8 -verbose
+
+# Dry run to see what would be generated
+./filament-samples -dry-run
+
+# Show version
+./filament-samples -version
+```
+
+### Command Line Options
+
+- `-csv string`: Path to CSV file (default: "samples.csv")
+- `-output string`: Output directory for STL files (default: "stl/" relative to CSV file)
+- `-scad string`: Path to OpenSCAD file (default: "FilamentSamples.scad" relative to CSV file)
+- `-workers int`: Maximum concurrent workers (default: number of CPU cores)
+- `-verbose`: Enable verbose logging
+- `-dry-run`: Show what would be generated without creating files
+- `-version`: Show version information
+- `-help`: Show help information
 
 ### Troubleshooting
 
@@ -75,7 +102,7 @@ file to store the generated STL files.
 - **Permissions**: Ensure you have the necessary permissions to create directories and
 files in the specified output location.
 
-## Ackknowledgements
+## Acknowledgements
 
 This was originally a fork of Markus Krause's
 [FilamentSamples](https://github.com/markusdd/FilamentSamples) that was written
@@ -84,6 +111,36 @@ complete rewrite and basic unit tests. You can find that in the
 [legacy-python](legacy-python/) directory.
 
 I have since rewritten that completely in Golang.
+
+## Recent Improvements (v2.0)
+
+The application has been significantly improved with the following enhancements:
+
+### Code Quality & Organization
+- **Proper Go project structure** with separate packages for different concerns
+- **Comprehensive error handling** with proper error propagation
+- **Unit tests** for critical components
+- **Structured logging** with configurable verbosity levels
+
+### Performance & Reliability  
+- **Concurrent STL generation** using worker pools for faster processing
+- **CSV validation** with proper field checking and temperature range validation
+- **Robust OpenSCAD path detection** across different platforms
+- **Better file handling** with proper cleanup and error recovery
+
+### User Experience
+- **Rich command-line interface** with comprehensive flag support
+- **Dry-run mode** to preview what will be generated
+- **Verbose logging** for troubleshooting
+- **Progress tracking** for large datasets
+- **Improved Makefile** with multiple build targets
+
+### Technical Features
+- **Header row detection** in CSV files
+- **Comment support** in CSV files (lines starting with #)
+- **Configurable worker count** for optimal performance
+- **Cross-platform compatibility** improvements
+- **Better module naming** following Go conventions
 
 This was derived this OpenSCAD model from blazerat over at printables:
 <https://www.printables.com/de/model/356074-filament-sample-card/files>
