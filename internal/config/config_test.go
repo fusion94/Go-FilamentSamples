@@ -248,6 +248,41 @@ func TestDefaultConfigPath(t *testing.T) {
 	}
 }
 
+func TestConfig_SaveToFile_Error(t *testing.T) {
+	// Test with invalid path
+	config := &Config{
+		CSVFile: "test.csv",
+	}
+	
+	// Try to save to an invalid path (directory as file)
+	err := config.SaveToFile("/dev/null/config.json")
+	if err == nil {
+		t.Error("Expected error when saving to invalid path")
+	}
+}
+
+func TestDefaultConfigPath_Coverage(t *testing.T) {
+	// Test the error path when getting user home directory fails
+	// This is difficult to test directly, but we can at least call the function
+	// to ensure it handles the case gracefully
+	
+	originalHome := os.Getenv("HOME")
+	defer os.Setenv("HOME", originalHome)
+	
+	// Temporarily unset HOME to trigger fallback
+	os.Unsetenv("HOME")
+	
+	path := DefaultConfigPath()
+	if path == "" {
+		t.Error("DefaultConfigPath() should return fallback path when HOME is not set")
+	}
+	
+	// Should fall back to simple filename
+	if path != "filament-samples.json" && !filepath.IsAbs(path) {
+		t.Errorf("Expected fallback path 'filament-samples.json', got %s", path)
+	}
+}
+
 func TestExampleConfig(t *testing.T) {
 	config := ExampleConfig()
 	if config == nil {

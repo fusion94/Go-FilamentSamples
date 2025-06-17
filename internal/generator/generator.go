@@ -39,8 +39,8 @@ func (c *Config) Validate() error {
 
 type Generator struct {
 	config   *Config
-	executor *openscad.Executor
-	parser   *csv.Parser
+	executor Executor
+	parser   Parser
 	logger   *log.Logger
 }
 

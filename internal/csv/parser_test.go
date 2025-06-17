@@ -1,6 +1,8 @@
 package csv
 
 import (
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 )
@@ -110,6 +112,111 @@ func TestParser_isHeaderRow(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := parser.isHeaderRow(tt.record); got != tt.want {
 				t.Errorf("Parser.isHeaderRow() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestParser_ParseFile(t *testing.T) {
+	// Create temporary test files
+	tempDir := t.TempDir()
+	
+	// Test valid CSV file
+	validCSV := `Brand,Type,Color,TempHotend,TempBed
+Test Brand,PLA,Red,200-220,60
+Test Brand,PETG,Blue,240-260,70`
+	
+	validFile := filepath.Join(tempDir, "valid.csv")
+	if err := os.WriteFile(validFile, []byte(validCSV), 0644); err != nil {
+		t.Fatal(err)
+	}
+	
+	// Test nonexistent file
+	nonexistentFile := filepath.Join(tempDir, "nonexistent.csv")
+	
+	tests := []struct {
+		name     string
+		filename string
+		wantLen  int
+		wantErr  bool
+	}{
+		{
+			name:     "valid file",
+			filename: validFile,
+			wantLen:  2,
+			wantErr:  false,
+		},
+		{
+			name:     "nonexistent file",
+			filename: nonexistentFile,
+			wantErr:  true,
+		},
+	}
+	
+	parser := NewParser()
+	
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			samples, err := parser.ParseFile(tt.filename)
+			
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Parser.ParseFile() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			
+			if !tt.wantErr && len(samples) != tt.wantLen {
+				t.Errorf("Parser.ParseFile() returned %d samples, want %d", len(samples), tt.wantLen)
+			}
+		})
+	}
+}
+
+func TestParser_parseRecord_EdgeCases(t *testing.T) {
+	parser := NewParser()
+	
+	tests := []struct {
+		name    string
+		record  []string
+		lineNum int
+		wantErr bool
+	}{
+		{
+			name:    "all optional fields present",
+			record:  []string{"Brand", "Type", "Color", "200", "60", "12", "8", "10"},
+			lineNum: 1,
+			wantErr: false,
+		},
+		{
+			name:    "some optional fields empty",
+			record:  []string{"Brand", "Type", "Color", "200", "60", "", "8", ""},
+			lineNum: 1,
+			wantErr: false,
+		},
+		{
+			name:    "all optional fields empty",
+			record:  []string{"Brand", "Type", "Color", "200", "60", "", "", ""},
+			lineNum: 1,
+			wantErr: false,
+		},
+		{
+			name:    "extra whitespace",
+			record:  []string{" Brand ", " Type ", " Color ", " 200 ", " 60 "},
+			lineNum: 1,
+			wantErr: false,
+		},
+	}
+	
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			sample, err := parser.parseRecord(tt.record, tt.lineNum)
+			
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Parser.parseRecord() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			
+			if !tt.wantErr && sample == nil {
+				t.Error("Parser.parseRecord() returned nil sample")
 			}
 		})
 	}

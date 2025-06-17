@@ -8,3 +8,6 @@ Markus
 Krause's
 blazerat
 printables
+dylib
+ehthumbs
+gcode

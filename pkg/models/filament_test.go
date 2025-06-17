@@ -22,12 +22,63 @@ func TestFilamentSample_Validate(t *testing.T) {
 			wantErr: false,
 		},
 		{
+			name: "valid sample with single temperatures",
+			sample: FilamentSample{
+				Brand:      "Test Brand",
+				Type:       "PLA",
+				Color:      "Red",
+				TempHotend: "200",
+				TempBed:    "60",
+			},
+			wantErr: false,
+		},
+		{
 			name: "missing brand",
 			sample: FilamentSample{
 				Type:       "PLA",
 				Color:      "Red",
 				TempHotend: "200-220",
 				TempBed:    "60",
+			},
+			wantErr: true,
+		},
+		{
+			name: "missing type",
+			sample: FilamentSample{
+				Brand:      "Test Brand",
+				Color:      "Red",
+				TempHotend: "200-220",
+				TempBed:    "60",
+			},
+			wantErr: true,
+		},
+		{
+			name: "missing color",
+			sample: FilamentSample{
+				Brand:      "Test Brand",
+				Type:       "PLA",
+				TempHotend: "200-220",
+				TempBed:    "60",
+			},
+			wantErr: true,
+		},
+		{
+			name: "missing hotend temp",
+			sample: FilamentSample{
+				Brand:   "Test Brand",
+				Type:    "PLA",
+				Color:   "Red",
+				TempBed: "60",
+			},
+			wantErr: true,
+		},
+		{
+			name: "missing bed temp",
+			sample: FilamentSample{
+				Brand:      "Test Brand",
+				Type:       "PLA",
+				Color:      "Red",
+				TempHotend: "200-220",
 			},
 			wantErr: true,
 		},
@@ -49,6 +100,50 @@ func TestFilamentSample_Validate(t *testing.T) {
 				Type:       "PLA",
 				Color:      "Red",
 				TempHotend: "invalid",
+				TempBed:    "60",
+			},
+			wantErr: true,
+		},
+		{
+			name: "invalid bed temperature",
+			sample: FilamentSample{
+				Brand:      "Test Brand",
+				Type:       "PLA",
+				Color:      "Red",
+				TempHotend: "200-220",
+				TempBed:    "invalid",
+			},
+			wantErr: true,
+		},
+		{
+			name: "invalid range format - too many parts",
+			sample: FilamentSample{
+				Brand:      "Test Brand",
+				Type:       "PLA",
+				Color:      "Red",
+				TempHotend: "200-220-240",
+				TempBed:    "60",
+			},
+			wantErr: true,
+		},
+		{
+			name: "invalid range - non-numeric min",
+			sample: FilamentSample{
+				Brand:      "Test Brand",
+				Type:       "PLA",
+				Color:      "Red",
+				TempHotend: "abc-220",
+				TempBed:    "60",
+			},
+			wantErr: true,
+		},
+		{
+			name: "invalid range - non-numeric max",
+			sample: FilamentSample{
+				Brand:      "Test Brand",
+				Type:       "PLA",
+				Color:      "Red",
+				TempHotend: "200-xyz",
 				TempBed:    "60",
 			},
 			wantErr: true,
@@ -81,34 +176,124 @@ func TestFilamentSample_Filename(t *testing.T) {
 }
 
 func TestFilamentSample_OpenSCADArgs(t *testing.T) {
-	sample := FilamentSample{
-		Brand:      "Test Brand",
-		Type:       "PLA",
-		Color:      "Red",
-		TempHotend: "200-220",
-		TempBed:    "60",
-		BrandSize:  "12",
+	tests := []struct {
+		name         string
+		sample       FilamentSample
+		expectedArgs []string
+	}{
+		{
+			name: "minimal args",
+			sample: FilamentSample{
+				Brand:      "Test Brand",
+				Type:       "PLA",
+				Color:      "Red",
+				TempHotend: "200-220",
+				TempBed:    "60",
+			},
+			expectedArgs: []string{
+				"-D", `BRAND="Test Brand"`,
+				"-D", `TYPE="PLA"`,
+				"-D", `COLOR="Red"`,
+				"-D", `TEMP_HOTEND="200-220"`,
+				"-D", `TEMP_BED="60"`,
+			},
+		},
+		{
+			name: "with brand size",
+			sample: FilamentSample{
+				Brand:      "Test Brand",
+				Type:       "PLA",
+				Color:      "Red",
+				TempHotend: "200-220",
+				TempBed:    "60",
+				BrandSize:  "12",
+			},
+			expectedArgs: []string{
+				"-D", `BRAND="Test Brand"`,
+				"-D", `TYPE="PLA"`,
+				"-D", `COLOR="Red"`,
+				"-D", `TEMP_HOTEND="200-220"`,
+				"-D", `TEMP_BED="60"`,
+				"-D", "BRAND_SIZE=12",
+			},
+		},
+		{
+			name: "with type size",
+			sample: FilamentSample{
+				Brand:      "Test Brand",
+				Type:       "PLA",
+				Color:      "Red",
+				TempHotend: "200-220",
+				TempBed:    "60",
+				TypeSize:   "8",
+			},
+			expectedArgs: []string{
+				"-D", `BRAND="Test Brand"`,
+				"-D", `TYPE="PLA"`,
+				"-D", `COLOR="Red"`,
+				"-D", `TEMP_HOTEND="200-220"`,
+				"-D", `TEMP_BED="60"`,
+				"-D", "TYPE_SIZE=8",
+			},
+		},
+		{
+			name: "with color size",
+			sample: FilamentSample{
+				Brand:      "Test Brand",
+				Type:       "PLA",
+				Color:      "Red",
+				TempHotend: "200-220",
+				TempBed:    "60",
+				ColorSize:  "10",
+			},
+			expectedArgs: []string{
+				"-D", `BRAND="Test Brand"`,
+				"-D", `TYPE="PLA"`,
+				"-D", `COLOR="Red"`,
+				"-D", `TEMP_HOTEND="200-220"`,
+				"-D", `TEMP_BED="60"`,
+				"-D", "COLOR_SIZE=10",
+			},
+		},
+		{
+			name: "with all sizes",
+			sample: FilamentSample{
+				Brand:      "Test Brand",
+				Type:       "PLA",
+				Color:      "Red",
+				TempHotend: "200-220",
+				TempBed:    "60",
+				BrandSize:  "12",
+				TypeSize:   "8",
+				ColorSize:  "10",
+			},
+			expectedArgs: []string{
+				"-D", `BRAND="Test Brand"`,
+				"-D", `TYPE="PLA"`,
+				"-D", `COLOR="Red"`,
+				"-D", `TEMP_HOTEND="200-220"`,
+				"-D", `TEMP_BED="60"`,
+				"-D", "BRAND_SIZE=12",
+				"-D", "TYPE_SIZE=8",
+				"-D", "COLOR_SIZE=10",
+			},
+		},
 	}
 
-	args := sample.OpenSCADArgs()
-	
-	expectedArgs := []string{
-		"-D", `BRAND="Test Brand"`,
-		"-D", `TYPE="PLA"`,
-		"-D", `COLOR="Red"`,
-		"-D", `TEMP_HOTEND="200-220"`,
-		"-D", `TEMP_BED="60"`,
-		"-D", "BRAND_SIZE=12",
-	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			args := tt.sample.OpenSCADArgs()
 
-	if len(args) != len(expectedArgs) {
-		t.Errorf("Expected %d args, got %d", len(expectedArgs), len(args))
-		return
-	}
+			if len(args) != len(tt.expectedArgs) {
+				t.Errorf("Expected %d args, got %d", len(tt.expectedArgs), len(args))
+				return
+			}
 
-	for i, arg := range args {
-		if arg != expectedArgs[i] {
-			t.Errorf("Arg %d: expected %q, got %q", i, expectedArgs[i], arg)
-		}
+			for i, arg := range args {
+				if arg != tt.expectedArgs[i] {
+					t.Errorf("Arg %d: expected %q, got %q", i, tt.expectedArgs[i], arg)
+				}
+			}
+		})
 	}
 }

@@ -198,3 +198,129 @@ func TestPlatformSpecificPaths(t *testing.T) {
 		}
 	}
 }
+
+func TestFindOpenSCADPath_AllPlatforms(t *testing.T) {
+	// Note: We can't actually change runtime.GOOS, so we'll just ensure our current platform doesn't crash
+	t.Run("current platform", func(t *testing.T) {
+		_, err := findOpenSCADPath()
+		// We don't care if it errors (OpenSCAD might not be installed),
+		// we just want to ensure it doesn't panic
+		_ = err
+	})
+	
+	// Test PATH lookup when executable exists
+	if runtime.GOOS == "darwin" || runtime.GOOS == "linux" {
+		t.Run("openscad in PATH", func(t *testing.T) {
+			// Create a temporary "openscad" executable
+			tempDir := t.TempDir()
+			mockPath := filepath.Join(tempDir, "openscad")
+			if err := os.WriteFile(mockPath, []byte("#!/bin/bash\necho mock"), 0755); err != nil {
+				t.Fatal(err)
+			}
+			
+			// Temporarily modify PATH
+			originalPath := os.Getenv("PATH")
+			os.Setenv("PATH", tempDir+":"+originalPath)
+			defer os.Setenv("PATH", originalPath)
+			
+			path, err := findOpenSCADPath()
+			if err != nil {
+				t.Errorf("Expected to find openscad in PATH, got error: %v", err)
+			}
+			if path != mockPath {
+				t.Errorf("Expected path %s, got %s", mockPath, path)
+			}
+		})
+	}
+}
+
+func TestExecutor_GetVersion_Error(t *testing.T) {
+	tempDir := t.TempDir()
+	scadFile := filepath.Join(tempDir, "test.scad")
+	
+	if err := os.WriteFile(scadFile, []byte("// test scad file"), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	// Create a fake OpenSCAD that fails
+	fakeOpenSCAD := filepath.Join(tempDir, "fake_openscad")
+	var scriptContent string
+	if runtime.GOOS == "windows" {
+		fakeOpenSCAD += ".bat"
+		scriptContent = "@echo off\nexit 1\n"
+	} else {
+		scriptContent = "#!/bin/bash\nexit 1\n"
+	}
+	
+	if err := os.WriteFile(fakeOpenSCAD, []byte(scriptContent), 0755); err != nil {
+		t.Fatal(err)
+	}
+
+	executor := &Executor{
+		OpenSCADPath: fakeOpenSCAD,
+		ScadFile:     scadFile,
+	}
+
+	_, err := executor.GetVersion()
+	if err == nil {
+		t.Error("GetVersion() should return error when command fails")
+	}
+}
+
+func TestNewExecutor_Error(t *testing.T) {
+	// Test when OpenSCAD is not found
+	// Mock the findOpenSCADPath to return an error
+	
+	tempDir := t.TempDir()
+	scadFile := filepath.Join(tempDir, "test.scad")
+	
+	if err := os.WriteFile(scadFile, []byte("// test scad file"), 0644); err != nil {
+		t.Fatal(err)
+	}
+	
+	// Temporarily modify PATH to ensure OpenSCAD is not found
+	originalPath := os.Getenv("PATH")
+	os.Setenv("PATH", "/nonexistent")
+	defer os.Setenv("PATH", originalPath)
+	
+	_, err := NewExecutor(scadFile)
+	if err == nil {
+		// If no error, OpenSCAD might actually be installed in a standard location
+		t.Skip("OpenSCAD appears to be installed, skipping error test")
+	}
+}
+
+func TestExecutor_GenerateSTL_Error(t *testing.T) {
+	tempDir := t.TempDir()
+	scadFile := filepath.Join(tempDir, "test.scad")
+	outputFile := filepath.Join(tempDir, "output.stl")
+	
+	if err := os.WriteFile(scadFile, []byte("cube([10,10,10]);"), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	// Create a fake OpenSCAD that exits with error
+	fakeOpenSCAD := filepath.Join(tempDir, "fake_openscad")
+	var scriptContent string
+	if runtime.GOOS == "windows" {
+		fakeOpenSCAD += ".bat"
+		scriptContent = "@echo off\necho Error: Failed to generate STL >&2\nexit 1\n"
+	} else {
+		scriptContent = "#!/bin/bash\necho 'Error: Failed to generate STL' >&2\nexit 1\n"
+	}
+	
+	if err := os.WriteFile(fakeOpenSCAD, []byte(scriptContent), 0755); err != nil {
+		t.Fatal(err)
+	}
+
+	executor := &Executor{
+		OpenSCADPath: fakeOpenSCAD,
+		ScadFile:     scadFile,
+	}
+
+	args := []string{"-D", "TEST=1"}
+	err := executor.GenerateSTL(outputFile, args)
+	if err == nil {
+		t.Error("GenerateSTL() should return error when OpenSCAD fails")
+	}
+}

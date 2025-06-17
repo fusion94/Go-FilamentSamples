@@ -50,7 +50,7 @@ echo "$PACKAGE_COVERAGE" | while read line; do
     if [[ $line == *"coverage:"* ]]; then
         PACKAGE=$(echo "$line" | awk '{print $2}' | cut -d'/' -f4-)
         COVERAGE=$(echo "$line" | awk '{print $4}')
-        PERCENTAGE=$(echo "$COVERAGE" | tr -d '%' | cut -d'.' -f1)
+        PERCENTAGE=$(echo "$COVERAGE" | sed 's/%$//' | cut -d'.' -f1)
         
         if [ "$PERCENTAGE" -ge 80 ] 2>/dev/null; then
             STATUS="🟢 Excellent"
