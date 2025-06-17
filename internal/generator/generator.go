@@ -21,6 +21,22 @@ type Config struct {
 	DryRun       bool
 }
 
+func (c *Config) Validate() error {
+	if c.CSVFile == "" {
+		return fmt.Errorf("CSVFile is required")
+	}
+
+	if c.MaxWorkers < 1 {
+		c.MaxWorkers = 1
+	}
+
+	if c.MaxWorkers > 32 {
+		c.MaxWorkers = 32
+	}
+
+	return nil
+}
+
 type Generator struct {
 	config   *Config
 	executor *openscad.Executor

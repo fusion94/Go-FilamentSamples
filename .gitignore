@@ -46,6 +46,11 @@ stl/
 # Log files
 *.log
 
+# Coverage files
+coverage.out
+coverage.html
+COVERAGE_REPORT.md
+
 # Configuration files (if containing sensitive data)
 # config.json
 # .env

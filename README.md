@@ -41,6 +41,7 @@ should include the columns expected by the script, typically:
 ```
 BRAND,TYPE,COLOR,TEMP_HOTEND,TEMP_BED,BRAND_SIZE,TYPE_SIZE,COLOR_SIZE
 ```
+
 Ensure this file is placed in the same directory as the Go application or
 provide its path as a command-line argument.
 
@@ -54,11 +55,13 @@ file to store the generated STL files.
 ### Build the Application
 
 Using Make (recommended):
+
 ```bash
 make build
 ```
 
 Or using Go directly:
+
 ```bash
 go build -o filament-samples ./cmd/filament-samples
 ```
@@ -66,6 +69,7 @@ go build -o filament-samples ./cmd/filament-samples
 ### Running the Application
 
 Basic usage:
+
 ```bash
 ./filament-samples                    # Uses samples.csv in current directory
 ./filament-samples -csv myfile.csv    # Use custom CSV file
@@ -73,6 +77,7 @@ Basic usage:
 ```
 
 Advanced options:
+
 ```bash
 # Use custom settings
 ./filament-samples -csv samples.csv -output ./stl -workers 8 -verbose
@@ -100,13 +105,13 @@ Advanced options:
 - **OpenSCAD Not Found**: If you see an error about OpenSCAD not being found, ensure it is correctly installed and accessible via the command line.
 - **CSV Format Errors**: Make sure the CSV file does not contain empty lines or improperly formatted lines, as they will be skipped.
 - **Permissions**: Ensure you have the necessary permissions to create directories and
-files in the specified output location.
+  files in the specified output location.
 
 ## Acknowledgements
 
 This was originally a fork of Markus Krause's
 [FilamentSamples](https://github.com/markusdd/FilamentSamples) that was written
-in python. I forked that repp and made significant changes to it including a
+in python. I forked that repository and made significant changes to it including a
 complete rewrite and basic unit tests. You can find that in the
 [legacy-python](legacy-python/) directory.
 
@@ -117,18 +122,21 @@ I have since rewritten that completely in Golang.
 The application has been significantly improved with the following enhancements:
 
 ### Code Quality & Organization
+
 - **Proper Go project structure** with separate packages for different concerns
 - **Comprehensive error handling** with proper error propagation
 - **Unit tests** for critical components
 - **Structured logging** with configurable verbosity levels
 
-### Performance & Reliability  
+### Performance & Reliability
+
 - **Concurrent STL generation** using worker pools for faster processing
 - **CSV validation** with proper field checking and temperature range validation
 - **Robust OpenSCAD path detection** across different platforms
 - **Better file handling** with proper cleanup and error recovery
 
 ### User Experience
+
 - **Rich command-line interface** with comprehensive flag support
 - **Dry-run mode** to preview what will be generated
 - **Verbose logging** for troubleshooting
@@ -136,6 +144,7 @@ The application has been significantly improved with the following enhancements:
 - **Improved Makefile** with multiple build targets
 
 ### Technical Features
+
 - **Header row detection** in CSV files
 - **Comment support** in CSV files (lines starting with #)
 - **Configurable worker count** for optimal performance

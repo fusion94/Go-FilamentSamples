@@ -7,14 +7,18 @@ LDFLAGS=-ldflags "-X main.version=$(VERSION)"
 
 help:
 	@echo "Available targets:"
-	@echo "  build    - Build the binary"
-	@echo "  install  - Install the binary to GOPATH/bin"
-	@echo "  run      - Run the application"
-	@echo "  test     - Run tests"
-	@echo "  lint     - Run golangci-lint"
-	@echo "  fmt      - Format code"
-	@echo "  vet      - Run go vet"
-	@echo "  clean    - Clean build artifacts"
+	@echo "  build          - Build the binary"
+	@echo "  install        - Install the binary to GOPATH/bin"
+	@echo "  run            - Run the application"
+	@echo "  test           - Run all tests"
+	@echo "  test-short     - Run tests in short mode (skip integration tests)"
+	@echo "  bench          - Run benchmark tests"
+	@echo "  test-coverage  - Generate test coverage report"
+	@echo "  coverage-report- Generate detailed markdown coverage report"
+	@echo "  lint           - Run golangci-lint"
+	@echo "  fmt            - Format code"
+	@echo "  vet            - Run go vet"
+	@echo "  clean          - Clean build artifacts"
 
 build:
 	go mod tidy
@@ -29,6 +33,19 @@ run:
 
 test:
 	go test -v ./...
+
+test-short:
+	go test -short -v ./...
+
+bench:
+	go test -bench=. -benchmem ./...
+
+test-coverage:
+	go test -coverprofile=coverage.out ./...
+	go tool cover -html=coverage.out -o coverage.html
+
+coverage-report:
+	@./scripts/generate-coverage-report.sh
 
 lint:
 	@which golangci-lint > /dev/null || (echo "golangci-lint not found, install it from https://golangci-lint.run/usage/install/" && exit 1)
