@@ -11,3 +11,7 @@ printables
 dylib
 ehthumbs
 gcode
+coverprofile
+unittests
+unit-tests
+codecov

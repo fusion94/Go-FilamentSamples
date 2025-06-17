@@ -37,10 +37,12 @@ jobs:
       run: |
         COVERAGE=$(go tool cover -func=coverage.out | grep total | awk '{print $3}' | sed 's/%//')
         echo "Coverage: $COVERAGE%"
-        if (( $(echo "$COVERAGE < 80" | bc -l) )); then
+        COVERAGE_INT=$(echo "$COVERAGE" | cut -d'.' -f1)
+        if [ "$COVERAGE_INT" -lt 80 ]; then
           echo "Error: Test coverage ($COVERAGE%) is below 80%"
           exit 1
         fi
+        echo "✅ Coverage check passed: $COVERAGE%"
 
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3
@@ -48,5 +50,6 @@ jobs:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       with:
         file: ./coverage.out
-        flags: unittests
+        flags: unit-tests
         name: codecov-umbrella
+        fail_ci_if_error: false
